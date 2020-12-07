@@ -1,0 +1,23 @@
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base/redis
+  - ../base/ingress-controller
+  - ../base/prometheus-operator
+  - ../base/filebeat
+configMapGenerator:
+  - name: redis-values
+    files:
+      - values.yaml=values-redis.yaml
+    namespace: redis
+  - name: ingress-nginx-values
+    files:
+      - values.yaml=values-ingress-nginx.yaml
+    namespace: ops
+  - name: prometheus-operator-values
+    files:
+      - values.yaml=values-prometheus-operator.yaml
+    namespace: prometheus
+configurations:
+  - kustomizeconfig.yaml
