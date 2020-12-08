@@ -1,0 +1,3 @@
+# Add your values here
+grafana: 
+  enabled: false
