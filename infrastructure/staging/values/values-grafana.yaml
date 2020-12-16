@@ -1,0 +1,5 @@
+plugins:
+  - grafana-kubernetes-app
+replicas: 1
+ingress:
+  enabled: false

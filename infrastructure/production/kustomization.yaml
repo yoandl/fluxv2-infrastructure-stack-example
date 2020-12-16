@@ -1,23 +1,30 @@
-
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ../base/redis
   - ../base/ingress-controller
   - ../base/prometheus-operator
   - ../base/filebeat
+# - ../base/fluent-bit # You can use this instead of filebeat 
+  - ../base/elasticsearch-data
+  - ../base/elasticsearch-master
+  - ../base/grafana
+  - ../base/kibana
 configMapGenerator:
-  - name: redis-values
-    files:
-      - values.yaml=./values/values-redis.yaml
-    namespace: redis
-  - name: ingress-nginx-values
+  - name: values-ingress-nginx
     files:
       - values.yaml=./values/values-ingress-nginx.yaml
     namespace: ops
-  - name: prometheus-operator-values
+  - name: values-prometheus-operator
     files:
       - values.yaml=./values/values-prometheus-operator.yaml
-    namespace: prometheus
+    namespace: monitoring
+  - name: values-elasticsearch-master
+    files:
+      - values.yaml=./values/values-elasticsearch-master.yaml
+    namespace: monitoring
+  - name: values-elasticsearch-data
+    files:
+      - values.yaml=./values/values-elasticsearch-data.yaml
+    namespace: monitoring
 configurations:
   - kustomizeconfig.yaml

@@ -1,20 +1,19 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: prometheus-operator
+  name: grafana
 spec:
-  releaseName: prometheus-operator
+  releaseName: grafana
   chart:
     spec:
-      chart: kube-prometheus-stack
+      chart: grafana
       sourceRef:
         kind: HelmRepository
-        name: prometheus-community
+        name: grafana
         namespace: flux-system
   interval: 1h0m0s
   install:
     remediation:
       retries: 3
-  valuesFrom:
-    - kind: ConfigMap
-      name: values-prometheus-operator
+  values: # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+    datasource: {}

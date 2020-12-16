@@ -1,0 +1,9 @@
+clusterName: "log-elasticsearch"
+nodeGroup: "data"
+roles:
+  master: "false"
+  ingest: "true"
+  data: "true"
+
+replicas: 1
+maximumMasterNodes: 1
